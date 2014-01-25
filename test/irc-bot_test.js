@@ -1,6 +1,6 @@
 'use strict';
 
-var irc_bot = require('../lib/irc-bot.js');
+var Bot = require('../lib/irc-bot.js');
 
 /*
    ======== A Handy Little Nodeunit Reference ========
@@ -27,10 +27,15 @@ exports['awesome'] = {
       // setup here
       done();
    },
-   'no args': function(test) {
+   'constructor config checking': function(test) {
       test.expect(1);
-      // tests here
-      test.equal(irc_bot.awesome(), 'awesome', 'should be awesome.');
+      test.throws(
+         function() {
+            new Bot();
+         },
+         Error,
+         'Error thrown for missing config'
+      );
       test.done();
    },
 };
